@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -24,7 +26,21 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('addPost');
+    }
+    public function Search()
+    {
+        return view('search');
+    }
+    public function searchPosts(Request $request){
+        $notFound="No Search results for ".$request->title;
+        $title=$request->title;
+        $posts=post::where('title',$title)->get();
+        if (sizeof($posts)>0)
+            return view('home',compact('posts','title'));
+        else
+            return view('home',compact('notFound'));
+
     }
 
     /**
@@ -35,7 +51,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = $request->file('img')->store('images');
+        $post=new post();
+        $post->img=$path;
+        $post->title=$request->title;
+        $post->user_id=auth::user()->id;
+        $post->content=$request->contents;
+        $post->save();
+
+        return redirect('/home');
+
     }
 
     /**
