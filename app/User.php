@@ -10,6 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    private $posts;
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +28,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    function get_posts(){
+        $this->posts = post::where('user_id',$this->id)->get();
+        return $this->posts;
+    }
 }
