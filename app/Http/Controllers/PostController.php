@@ -51,9 +51,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('img')->store('images');
+
+        $path = $request->file('img')->store('public');
         $post=new post();
-        $post->img=$path;
+        $post->img=str_replace('public/','',$path);
         $post->title=$request->title;
         $post->user_id=auth::user()->id;
         $post->content=$request->contents;

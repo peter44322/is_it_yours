@@ -21,7 +21,7 @@
         @foreach($posts as $post)
             <div class="col-md-10 blogShort">
                 <h1>{{$post->title}}</h1>
-                <img src="{{url('storage/app/'.$post->img)}}" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+                <img src="{{url('storage/'.$post->img)}}" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
                 <article><p>
                         {{$post->content}}
                     </p></article>
@@ -32,7 +32,7 @@
         @foreach(\App\post::all() as $post)
             <div class="col-md-10 blogShort">
                 <h1>{{$post->title}}</h1>
-                <img src="{{url('storage/app/'.$post->img)}}" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
+                <img src="{{url('storage/'.$post->img)}}" alt="post img" class="pull-left img-responsive thumb margin10 img-thumbnail">
                 <article><p>
                         {{$post->content}}
                     </p></article>
